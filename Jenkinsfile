@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage('build'){
 			steps{
-				sh('cp hello.spec ~/pmbuild/SPECS')
+				sh('cp hello.spec ~/pmbuild/SPECS/hello.spec')
 				sh('cd ~/pmbuild/SPECS ; rpmbuild -ba hello.spec')
 			}
 		}
