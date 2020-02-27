@@ -3,6 +3,12 @@ pipeline {
     stages {
         stage('Init') {
     		matrix {
+			agent {
+				docker {
+					image "${PLATFORM}"
+		     			args '-u 0'
+				}
+			}
     			axes {
         			axis {
             				name 'PLATFORM'
@@ -10,12 +16,6 @@ pipeline {
         			}
    			}	
     		}
-		agent {
-			docker {
-				image "${PLATFORM}"
-	     			args '-u 0'
-			}
-		}
            	 steps {
                 	copyArtifacts(projectName: 'bkh_build_rpm')
                 	sh('ls')
