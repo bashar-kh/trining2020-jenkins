@@ -13,5 +13,11 @@ pipeline {
                 sh('ls')
             }
         }
+        stage('test') {
+            steps {
+                sh('dnf install -y hello-[^d]*rpm')
+                sh('hello')
+            }
+        }
     }
 }
