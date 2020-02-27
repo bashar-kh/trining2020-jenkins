@@ -1,13 +1,20 @@
 #!/bin/groovy
 pipeline {
-    agent {
-        docker {
-            image 'fedora'
-	     args '-u 0'
-        }
+    matrix {
+    	axes {
+        	axis {
+            		name 'PLATFORM'
+            		values 'fedora:29', 'fedora:30', 'fedora:31'
+        	}
+   	}	
     }
-
     stages {
+	agent {
+		docker {
+			image "${PLATFORM}"
+	     		args '-u 0'
+		}
+	}
         stage('Init') {
             steps {
                 copyArtifacts(projectName: 'bkh_build_rpm')
