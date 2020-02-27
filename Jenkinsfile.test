@@ -16,19 +16,19 @@ pipeline {
             				values 'fedora:29', 'fedora:30', 'fedora:31'
         			}
    			}	
-    		}
-		stages {
-			stage ('INIT'){
-           			steps {
-                			copyArtifacts(projectName: 'bkh_build_rpm')
-                			sh('ls')
+			stages {
+				stage ('INIT'){
+	           			steps {
+	                			copyArtifacts(projectName: 'bkh_build_rpm')
+	                			sh('ls')
+					}
 				}
-			}
-			stage ('Test'){
-            			steps {
-                			sh('dnf install -y hello-[^d]*rpm')
-                			sh('hello')
-            			}
+				stage ('Test'){
+	            			steps {
+	                			sh('dnf install -y hello-[^d]*rpm')
+	                			sh('hello')
+	            			}
+				}
 			}
 		}
         }
