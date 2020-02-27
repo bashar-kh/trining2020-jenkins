@@ -13,5 +13,17 @@ pipeline {
 				sh('~/rpmbuild/SPECS && rpmdev-newspec hello')
 			}
 		}
+		stage('build'){
+			steps{
+				sh('cp hello.spec ~/pmbuild/SPECS')
+				sh('cd ~/pmbuild/SPECS ; rpmbuild -ba hello.spec')
+			}
+		}
+		stage('Deploy'){
+			steps{
+				archiveArtifacts(artifacts: '/home/user/rpmbuild/RPMS/*.rpm')
+			}
+		}
+		
 	}
 }
