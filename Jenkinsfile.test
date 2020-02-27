@@ -2,7 +2,7 @@
 pipeline {
     agent none
     stages {
-        stage('Init') {
+        stage() {
     		matrix {
 			agent {
 				docker {
@@ -17,14 +17,20 @@ pipeline {
         			}
    			}	
     		}
-           	 steps {
-                	copyArtifacts(projectName: 'bkh_build_rpm')
-                	sh('ls')
-            	}
-            	steps {
-                	sh('dnf install -y hello-[^d]*rpm')
-                	sh('hello')
-            	}
+		stages {
+			stage ('INIT'){
+           			steps {
+                			copyArtifacts(projectName: 'bkh_build_rpm')
+                			sh('ls')
+				}
+			}
+			stage ('Test'){
+            			steps {
+                			sh('dnf install -y hello-[^d]*rpm')
+                			sh('hello')
+            			}
+			}
+		}
         }
     }
 }
