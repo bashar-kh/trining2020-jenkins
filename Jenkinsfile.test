@@ -1,5 +1,6 @@
 #!/bin/groovy
 pipeline {
+    agent none
     stages {
         stage('Init') {
     		matrix {
