@@ -1,5 +1,5 @@
 FROM fedora:latest
-RUN dnf -y install fedora-packager @development-tools && dnf clean all
+RUN dnf -y install wget fedora-packager @development-tools && dnf clean all
 RUN useradd -m bkhuser
 RUN usermod -a -G mock bkhuser
 USER bkhuser
