@@ -17,11 +17,12 @@ pipeline {
 			steps{
 				sh('cp hello.spec ~/rpmbuild/SPECS/hello.spec')
 				sh('cd ~/rpmbuild/SPECS ; rpmbuild -ba hello.spec')
+				sh('cp /home/user/rpmbuild/RPMS/*/*.rpm .')
 			}
 		}
 		stage('Deploy'){
 			steps{
-				archiveArtifacts(artifacts: '/home/user/rpmbuild/RPMS/*.rpm')
+				archiveArtifacts(artifacts: '*.rpm')
 			}
 		}
 		
