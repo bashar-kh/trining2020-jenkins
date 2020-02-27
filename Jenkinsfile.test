@@ -1,14 +1,14 @@
 #!/bin/groovy
 pipeline {
-    matrix {
-    	axes {
-        	axis {
-            		name 'PLATFORM'
-            		values 'fedora:29', 'fedora:30', 'fedora:31'
-        	}
-   	}	
-    }
     stages {
+    	matrix {
+    		axes {
+        		axis {
+            			name 'PLATFORM'
+            			values 'fedora:29', 'fedora:30', 'fedora:31'
+        		}
+   		}	
+    	}
 	agent {
 		docker {
 			image "${PLATFORM}"
