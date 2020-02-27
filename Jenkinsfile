@@ -5,7 +5,7 @@ pipeline {
 	}
 	stages {
 		stage('Init') {
-			step {
+			steps {
 				sh('echo $HOME')
 			}
 		}
