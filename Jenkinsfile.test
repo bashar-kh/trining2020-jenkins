@@ -1,6 +1,5 @@
 #!/bin/groovy
 pipeline {
-    agent none
     stages {
         stage('Matrix') {
     		matrix {
@@ -28,6 +27,13 @@ pipeline {
 	                			sh('dnf install -y hello-[^d]*rpm')
 	                			sh('hello')
 	            			}
+				}
+			}
+			post{
+				always {
+					ansiColor('xterm') {
+						
+					}
 				}
 			}
 		}
