@@ -31,6 +31,12 @@ pipeline {
 					}
 				}
 				stage ('Test'){
+					agent{
+						docker{
+							image "fedora:${PLATFORM}"
+							args '-u 0'
+						}
+					}
 	            			steps {
 	                			sh('dnf install -y hello-[^d]*rpm')
 	                			sh('hello')
