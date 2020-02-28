@@ -61,7 +61,7 @@ pipeline {
 				stage ('Test'){
 	            			steps {
 	                			sh('ls')
-	                			sh('sudo dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
+	                			sh('dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
 	                			sh('hello')
 	            			}
 				}
