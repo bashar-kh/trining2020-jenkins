@@ -43,7 +43,6 @@ pipeline {
 						}
 					}
 	            			steps {
-	                			copyArtifacts(projectName: 'bkh_allinone')
 	                			sh('ls')
 	                			sh('dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
 	                			sh('hello')
