@@ -30,6 +30,11 @@ pipeline {
 					       sh('cp ~/rpmbuild/RPMS/*/*.rpm .')
 					}
 				}
+ 				stage('Export artifactory') 
+            				steps {
+                				archiveArtifacts(artifacts: '*.rpm')
+            				}
+				}
 				stage ('Test'){
 					agent{
 						docker{
@@ -38,14 +43,11 @@ pipeline {
 						}
 					}
 	            			steps {
-	                			sh('dnf install -y hello-[^d]*rpm')
+	                			copyArtifacts(projectName: 'bkh_allinone')
+	                			sh('ls')
+	                			sh('dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
 	                			sh('hello')
 	            			}
-				}
- 				stage('Export artifactory') {
-            				steps {
-                				archiveArtifacts(artifacts: '*.rpm')
-            				}
 				}
 			}
 		}
