@@ -35,18 +35,39 @@ pipeline {
                 				archiveArtifacts(artifacts: '*.rpm')
             				}
 				}
+				stage('stash output'){
+					steps{
+						stash name:"rpm-${PLATFORM}", includes: "*fc${PLATFORM}*rpm"
+					}
+				}
+			}
+		}
+		matrix{
+			agent{
+				docker{
+					image "fedora:${PLATFORM}"
+					args '-u 0'
+				}
+			}
+			axes {
+                                axis {
+                                        name 'PLATFORM'
+                                        values '29', '30', '31'
+                                }
+                        }
+
+			stages{
 				stage ('Test'){
-				/*	agent{
-						docker{
-							image "fedora:${PLATFORM}"
-							args '-u 0'
-						}
-					}*/
 	            			steps {
 	                			sh('ls')
 	                			sh('sudo dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
 	                			sh('hello')
 	            			}
+				}
+				stage('unstash rpms'){
+					steps{
+						unstash "rpm-${PLATFORM}"
+					}
 				}
 			}
 		}
