@@ -5,10 +5,8 @@ pipeline {
         stage('Matrix') {
     		matrix {
 			agent {
-				docker {
-					dockerfile {
-        				    additionalBuildArgs  "--build-arg version=${PLATFORM}"
-					}
+				dockerfile {
+        			    additionalBuildArgs  "--build-arg version=${PLATFORM}"
 				}
 			}
     			axes {
