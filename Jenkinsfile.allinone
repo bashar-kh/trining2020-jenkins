@@ -30,7 +30,7 @@ pipeline {
 					       sh('cp ~/rpmbuild/RPMS/*/*.rpm .')
 					}
 				}
- 				stage('Export artifactory') 
+ 				stage('Export artifactory'){ 
             				steps {
                 				archiveArtifacts(artifacts: '*.rpm')
             				}
