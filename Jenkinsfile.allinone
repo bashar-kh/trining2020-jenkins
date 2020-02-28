@@ -36,15 +36,15 @@ pipeline {
             				}
 				}
 				stage ('Test'){
-					agent{
+				/*	agent{
 						docker{
 							image "fedora:${PLATFORM}"
 							args '-u 0'
 						}
-					}
+					}*/
 	            			steps {
 	                			sh('ls')
-	                			sh('dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
+	                			sh('sudo dnf install -y hello-[^d]*fc${PLATFORM}*rpm')
 	                			sh('hello')
 	            			}
 				}
